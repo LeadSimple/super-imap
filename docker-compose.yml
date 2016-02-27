@@ -1,0 +1,16 @@
+gems:
+  image: busybox
+  volumes:
+    - /usr/local/bundle
+db:
+  image: postgres
+web:
+  build: .
+  volumes:
+    - .:/www
+  volumes_from:
+    - gems
+  ports:
+    - "80:5000"
+  links:
+    - db:postgres
